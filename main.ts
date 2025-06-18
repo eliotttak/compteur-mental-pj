@@ -56,17 +56,15 @@ input.onButtonPressed(Button.AB, () => {
                 . . . . .
                 `
             )
-            basic.showString("l:" + parseInt(code) + ":" + control.deviceSerialNumber())
             radio.sendString("l:" + parseInt(code) + ":" + control.deviceSerialNumber())
         }
     }
 })
 
 radio.onReceivedString(value => {
-    basic.showString(value)
     if (executionStatus === "waiting_for_acceptance") {
         let parts = value.split(":")
-        if (parts[0] === "accepted") {
+        if (parts[0] === "acc") {
             let acceptedSerial = parseInt(parts[1])
             let acceptedNumber = parseInt(parts[2])
             if (acceptedSerial == control.deviceSerialNumber()) {
